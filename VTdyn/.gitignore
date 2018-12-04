@@ -1,0 +1,10 @@
+interaction_data/wints_CC
+interaction_data/ints_CC
+interaction_data/raw_data
+interaction_data/ints_CD
+interaction_data/wints_CD
+libs/__init__.pyc
+libs/data.pyc
+libs/pd_lib.pyc
+libs/pd_lib_neutral.pyc
+libs/plot.pyc
