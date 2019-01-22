@@ -10,6 +10,7 @@ import numpy as np
 import libs.pd_lib_neutral as lib
 import libs.data as data
 
+
 def calc_interactions(tissue,mutant_index,n):
     """treats all cells with ancestor 'mutant_index' as cooperators
     returns:
@@ -32,7 +33,8 @@ def calc_interactions(tissue,mutant_index,n):
 def run_sim(i):
     """run a single simulation and save interaction data for each clone"""
     rand = np.random.RandomState()
-    tissue = lib.initialise_tissue_ancestors(l,dt,10.,10.,rand)
+    dt=0.005*-50./MU
+    tissue = lib.initialise_tissue_ancestors(l,dt,10.,10.,rand,MU)
     tissue.properties['ancestor']=np.arange(l*l)
     if init_timend is not None: tissue = lib.run(tissue,lib.simulation_ancestor_tracking(tissue,dt,init_timend/dt,init_timend/dt,rand),init_timend/dt,init_timend/dt)[-1]
     data = [calc_interactions(tissue,mutant_index,n)
@@ -46,10 +48,12 @@ init_timend = 10. # initial simulation time to equilibrate
 timestep = 12. # timesteps at which to calc interaction data (hours)
 timend = 10000. # length of simulation (hours)
 sim_runs = int(sys.argv[1]) # number of sims to run taken as command line arg
+MU = float(sys.argv[2]) #spring constant
 n_min = 1 
-outdir = 'interaction_data/main_text/raw_data'
-if not os.path.exists(outdir): # if the outdir doesn't exist create it
+outdir = 'interaction_data/supp_vary_MU/MU%d/raw_data'%MU
+if not os.path.exists(outdir): # if the outdir doesn't exist create it 
      os.makedirs(outdir)
+
 
 # run simulations in parallel 
 cpunum=mp.cpu_count()

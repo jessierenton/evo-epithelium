@@ -14,9 +14,17 @@
 ##To generate interaction data:
 - run `python cluster_stats.py 5000` 
 	- command line arg is number of simulations
-	- produces interaction\_data/raw\_data folder
-	- see data/interaction\_data for processing and how to calculate Lambda_CC and fixation probabilities
-
+	- produces interaction\_data/main\_text/raw\_data folder
+	- see data/interaction\_data/main\_text for processing and how to calculate Lambda_CC and fixation probabilities
+- run `python cluster_stats_vary_MU.py 500 -X`
+	- first command line arg is number of simulations
+	- second command line arg is MU. run for MU =0.1,1,10,25,50,100,250
+	- produces interaction\_data/supp\_vary\_MU/MU-X/raw\_data
+	- see data (as above)
+	
+##To generate neighbour distribution data for varying MU:
+- run `python get_data_vary_MU.py`
+- output saved to vary\_MU\_data
 
 ##To plot tissue objects or create animation
 - need to import libs.plot as vplt

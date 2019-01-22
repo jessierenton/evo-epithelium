@@ -18,7 +18,7 @@ def formatting(xlabel,ylabel,large=False,legend=False):
 def load_data(data_type,MU_vals,start_index=1):
     return {MU:np.array([np.loadtxt('MU%.1f/%s_%d'%(MU,data_type,i))[start_index:] for i in range(3)]) for MU in MU_vals}
     
-MU_vals = -np.array((0.1,1,50,100,250))
+MU_vals = -np.array((0.1,1,10,25,50,100,250))
 timestep = 1.0
 
 def plot_force(MU_vals):

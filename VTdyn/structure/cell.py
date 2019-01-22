@@ -2,7 +2,7 @@ import numpy as np
 import copy
 from functools import partial
 import global_constants as gc
-from global_constants import EPS, L0, MU, ETA, dt
+from global_constants import EPS, L0, MU, ETA
               
 class Tissue(object):    
     
@@ -87,6 +87,9 @@ class Force(object):
         
 class BasicSpringForceTemp(Force):
     
+    def __init__(self,MU=MU):
+        self.MU=MU
+    
     def force(self,tissue):
         return np.array([self.force_i(tissue,i,dist,vec,neigh) for i,(dist,vec,neigh) in enumerate(zip(tissue.mesh.distances,tissue.mesh.unit_vecs,tissue.mesh.neighbours))])
     
@@ -99,6 +102,6 @@ class BasicSpringForceNoGrowth(BasicSpringForceTemp):
     def force_i(self,tissue,i,distances,vecs,n_list):
         if tissue.age[i] >= 1.0 or tissue.mother[i] == -1: pref_sep = L0
         else: pref_sep = (tissue.mother[n_list]==tissue.mother[i])*((L0-EPS)*tissue.age[i]+EPS-L0) +L0
-        return (MU*vecs*np.repeat((distances-pref_sep)[:,np.newaxis],2,axis=1)).sum(axis=0)    
+        return (self.MU*vecs*np.repeat((distances-pref_sep)[:,np.newaxis],2,axis=1)).sum(axis=0)    
 
 

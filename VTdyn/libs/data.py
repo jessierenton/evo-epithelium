@@ -30,7 +30,7 @@ def save_force(history,outdir,index=0):
         wfile.write('%.3e \n'%np.mean(np.sqrt((tissue.Force(tissue)**2).sum(axis=1))))
     wfile.close() 
 
-def save_neighbour_distr(history,outdir,index=0,snap=-1):
+def save_neighbour_distr(history,outdir,index=0):
     """save neighbour distributions in each tissue"""
     if not os.path.exists(outdir): # if the folder doesn't exist create it
          os.makedirs(outdir)
